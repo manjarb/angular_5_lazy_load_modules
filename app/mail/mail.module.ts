@@ -8,13 +8,17 @@ import { MailAppComponent } from './components/mail-app/mail-app.component';
 import { MailViewComponent } from './components/mail-view/mail-view.component';
 import { MailViewResolve } from './components/mail-view/mail-view.resolve';
 
+import { AuthModule } from "../auth/auth.module";
+
 import { MailFolderResolve } from './containers/mail-folder/mail-folder.resolve';
 import { MailService } from './mail.service';
+import {AuthGuard} from "../auth/auth.guard";
 
 export const ROUTES: Routes = [
   {
     path: 'mail',
     component: MailAppComponent,
+    /*canActivate: [AuthGuard],*/
     children: [
       {
         path: 'folder/:name',
@@ -38,6 +42,7 @@ export const ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    AuthModule,
     RouterModule.forChild(ROUTES)
   ],
   declarations: [
